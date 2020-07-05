@@ -2,6 +2,9 @@
 Please share, change, fork, comment, contribute... the more eyes, the more fairer elections.
 
 
+Why English language in repo? The more people looking at this, the better.
+
+
 ## License - Attribution-ShareAlike 4.0 International - CC BY-SA 4.0
 Please see LICENSE.md file
 
