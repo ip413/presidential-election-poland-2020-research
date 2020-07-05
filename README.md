@@ -8,6 +8,13 @@ Why English language in repo? The more people looking at this, the better.
 ## License - Attribution-ShareAlike 4.0 International - CC BY-SA 4.0
 Please see LICENSE.md file
 
+## USAGE
+
+```
+gnuplot -p gnuplot/result_percentage_vs_invalid.plot
+```
+
+
 ## Data
 
 Data source:
