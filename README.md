@@ -43,7 +43,7 @@ The more people looking at this, the better.
 
 * Why analysis are so poor and not scientific? I'm not data scientist, I do what I can. I hope people better than me will use it.
 
-* Why not python, not oktawave, not cloud service, not API, not web app, not D3.js? There are some ideas, but there is als so little time. Just do it! 
+* Why not python, not octave, not R, not cloud service, not API, not web app, not D3.js? There are some ideas, but there is als so little time. Just do it! 
 
 ## License
 Attribution-ShareAlike 4.0 International - CC BY-SA 4.0
