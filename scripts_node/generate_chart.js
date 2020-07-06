@@ -2,8 +2,9 @@
  * Script takes arguments:
  * --colX  - column 1 name {String}
  * --colY  - column 2 name {String}
- * --trend-linear - print linear trend line, any value allowed {Boolean|String}
- * --show-chart - by default chart is save to png file, if option is present chart will be also shown, any value allowed {Boolean|String}
+ * --trend-linear - print linear trend line, any value allowed {Any}
+ * --stats - calculate stats, any value allowed {Any}
+ * --show-chart - by default chart is save to png file, if option is present chart will be also shown, any value allowed {Any}
  */
 
 const fs = require('fs');
@@ -33,6 +34,9 @@ f(x) = m*x + b;
 fit f(x)  'data-round-1-converted/data.csv' using ${colXIndex}:${colYIndex} via m,b
 `;
 
+const stats = !!argv.stats;
+const statsCommand = `stats 'data-round-1-converted/data.csv' using ${colXIndex}:${colYIndex}`
+
 const template = `
 set key noautotitle
 set datafile separator comma
@@ -44,6 +48,7 @@ set title "${title.replace(/_/g, '-')}"
 set ylabel "${ylabel.replace(/_/g, '-')}"
 set xlabel "${xlabel.replace(/_/g, '-')}"
 
+${stats ? statsCommand : ''}
 ${trendLinear ? trendLinearCommand : ''}
 plot 'data-round-1-converted/data.csv' using ${colXIndex}:${colYIndex} ${trendLinear ? ', f(x)' : ''}
 
