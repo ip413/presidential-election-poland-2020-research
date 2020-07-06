@@ -1,13 +1,15 @@
 # Data and analysis about presidential election in Poland, 2020
 * Aim of this repo is to give easier insight into presidential election in Poland, 2020.
 * You have to be familiar with sql or/and gnuplot to play around with data, or you can use examples from repo.
-* Please share, change, fork, comment, contribute... the more eyes, the more fairer elections.
+* Please share, change, fork, comment, contribute... the more eyes, the more fair elections.
 
 
 ## Dependencies
 Older versions could work also... or not.
 * gnuplot 5.2
 * sqlite 3.22
+* node 12.14.1
+* npx 6.13.4
 
 
 ## USAGE
@@ -16,8 +18,14 @@ Just play around with csv, ods or sqlite3 files. No GUI, sorry.
 Gnuplot example
 
 ```
-gnuplot -p gnuplot/example_invalid_votes_vs_result.plot
+gnuplot -p gnuplot/example_2_stats.plot
 ```
+
+Node exammple:
+```
+node scripts_node/generate_chart.js --colX glosy_niewazne_wiele_x_proc --colY wynik_biedron_proc --show-chart
+```
+
 
 
 ## Data
@@ -32,7 +40,8 @@ Database ```db/data.sqlite3``` contains single table with all necessary data. Th
 
 The only differences between the files are official data are:
 * 7 rows were removed due to malformed spreadsheet formulas,
-* columns with percentage results and invalid votes (suffix "proc") were added.
+* columns with percentage results and invalid votes (suffix "proc") were added,
+* addresses of electoral commission were stripped of ',' (comma) character, because of how gnuplot works
 
 ## FAQ
 
@@ -43,7 +52,9 @@ The more people looking at this, the better.
 
 * Why analysis are so poor and not scientific? I'm not data scientist, I do what I can. I hope people better than me will use it.
 
-* Why not python, not octave, not R, not cloud service, not API, not web app, not D3.js? There are some ideas, but there is als so little time. Just do it! 
+* Why not python, octave, R, cloud service, API, web app, D3.js? There are some ideas, but there is als so little time. If you have some spare time, do something about it!
+
+* There is a mess in this repo, why? I don't know!
 
 ## License
 Attribution-ShareAlike 4.0 International - CC BY-SA 4.0
