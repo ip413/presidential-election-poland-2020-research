@@ -2,6 +2,14 @@
 * Aim of this repo is to give easier insight into presidential election in Poland, 2020.
 * You have to be familiar with sql or/and gnuplot to play around with data, or you can use examples from repo.
 * Please share, change, fork, comment, contribute... the more eyes, the more fair elections.
+* I was inspired to do this by [https://dobek.org/2020/niepokojace-anomalia-statystyczne-w-wynikach-polonii/
+](https://dobek.org/2020/niepokojace-anomalia-statystyczne-w-wynikach-polonii/
+) and [https://www.wykop.pl/artykul/5582715/analiza-porownawcza-ilosci-glosow-niewaznych-vs-wyniki-wyborow-w-okregach-gt/
+](https://www.wykop.pl/artykul/5582715/analiza-porownawcza-ilosci-glosow-niewaznych-vs-wyniki-wyborow-w-okregach-gt/
+) - thank you guys!
+* Blog is here: [https://ip413.github.io/presidential-election-poland-2020/
+](https://ip413.github.io/presidential-election-poland-2020/
+)
 
 
 ## Dependencies
