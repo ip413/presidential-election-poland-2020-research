@@ -10,8 +10,10 @@ Please see LICENSE.md file
 
 ## USAGE
 
+Gnuplot example
+
 ```
-gnuplot -p gnuplot/result_percentage_vs_invalid.plot
+gnuplot -p gnuplot/example_invalid_votes_vs_result.plot
 ```
 
 
