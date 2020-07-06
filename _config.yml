@@ -1,1 +1,8 @@
+title: Presidential election in Poland, 2020
+description: Analysis and data
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
 theme: jekyll-theme-cayman

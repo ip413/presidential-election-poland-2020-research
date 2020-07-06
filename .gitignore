@@ -1,4 +1,4 @@
 temp.txt
 useful.txt
 node_modules
-!temp/.gitkeep
+temp/*.plot
