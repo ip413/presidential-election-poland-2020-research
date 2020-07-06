@@ -41,6 +41,8 @@ Data source:
 ```
 https://pkw.gov.pl/aktualnosci/informacje/protokol-pkw-o-wynikach-glosowania-w-wyborach-prezydenta-rzeczypospolitej-polskiej-przeprowadzonego-
 
+https://wybory.gov.pl/prezydent20200628/pl/dane_w_arkuszach
+
 https://wybory.gov.pl/prezydent20200628/data/1/csv/wyniki_gl_na_kand_po_obwodach_xlsx.zip
 ```
 
