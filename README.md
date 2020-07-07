@@ -31,7 +31,7 @@ gnuplot -p gnuplot/example_2_stats.plot
 
 Node example:
 ```
-node scripts_node/generate_chart.js --colX glosy_niewazne_wiele_x_proc --colY wynik_biedron_proc --show-chart
+node scripts_node/generate_chart.js --colX wynik_biedron_proc --colY glosy_niewazne_wiele_x_proc --show-chart
 ```
 
 
