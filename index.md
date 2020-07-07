@@ -217,17 +217,17 @@ Why 87 polling stations had problems with with putting in and pulling out the sa
 
 ### Code used to generate charts
 ```
-    node scripts_node/generate_chart.js --colY karty_niewykorzystane --colX wynik_biedron 
-    node scripts_node/generate_chart.js --colY karty_niewykorzystane --colX wynik_bosak
-    node scripts_node/generate_chart.js --colY karty_niewykorzystane --colX wynik_duda
-    node scripts_node/generate_chart.js --colY karty_niewykorzystane --colX wynik_holownia
-    node scripts_node/generate_chart.js --colY karty_niewykorzystane --colX wynik_jakubiak
-    node scripts_node/generate_chart.js --colY karty_niewykorzystane --colX wynik_kosiniak
-    node scripts_node/generate_chart.js --colY karty_niewykorzystane --colX wynik_piotrowski
-    node scripts_node/generate_chart.js --colY karty_niewykorzystane --colX wynik_tanajno
-    node scripts_node/generate_chart.js --colY karty_niewykorzystane --colX wynik_trzaskowski
-    node scripts_node/generate_chart.js --colY karty_niewykorzystane --colX wynik_witkowski
-    node scripts_node/generate_chart.js --colY karty_niewykorzystane --colX wynik_zoltek
+    node scripts-node/generate_chart.js --colY karty_niewykorzystane --colX wynik_biedron 
+    node scripts-node/generate_chart.js --colY karty_niewykorzystane --colX wynik_bosak
+    node scripts-node/generate_chart.js --colY karty_niewykorzystane --colX wynik_duda
+    node scripts-node/generate_chart.js --colY karty_niewykorzystane --colX wynik_holownia
+    node scripts-node/generate_chart.js --colY karty_niewykorzystane --colX wynik_jakubiak
+    node scripts-node/generate_chart.js --colY karty_niewykorzystane --colX wynik_kosiniak
+    node scripts-node/generate_chart.js --colY karty_niewykorzystane --colX wynik_piotrowski
+    node scripts-node/generate_chart.js --colY karty_niewykorzystane --colX wynik_tanajno
+    node scripts-node/generate_chart.js --colY karty_niewykorzystane --colX wynik_trzaskowski
+    node scripts-node/generate_chart.js --colY karty_niewykorzystane --colX wynik_witkowski
+    node scripts-node/generate_chart.js --colY karty_niewykorzystane --colX wynik_zoltek
 ```
 
 ### Results
@@ -255,17 +255,17 @@ Why Duda's and Kosiniak's chart is significantly different than Trzaskowski's an
 
 ### Code used to generate charts
 ```
-node scripts_node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_biedron_proc 
-node scripts_node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_bosak_proc
-node scripts_node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_duda_proc
-node scripts_node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_holownia_proc
-node scripts_node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_jakubiak_proc
-node scripts_node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_kosiniak_proc
-node scripts_node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_piotrowski_proc
-node scripts_node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_tanajno_proc
-node scripts_node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_trzaskowski_proc
-node scripts_node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_witkowski_proc
-node scripts_node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_zoltek_proc
+node scripts-node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_biedron_proc 
+node scripts-node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_bosak_proc
+node scripts-node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_duda_proc
+node scripts-node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_holownia_proc
+node scripts-node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_jakubiak_proc
+node scripts-node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_kosiniak_proc
+node scripts-node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_piotrowski_proc
+node scripts-node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_tanajno_proc
+node scripts-node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_trzaskowski_proc
+node scripts-node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_witkowski_proc
+node scripts-node/generate_chart.js --colY glosy_niewazne_proc --colX wynik_zoltek_proc
 ```
 
 ### Results
