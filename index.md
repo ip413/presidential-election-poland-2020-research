@@ -244,6 +244,8 @@ Why 87 polling stations had problems with with putting in and pulling out the sa
 ![](charts/karty_niewykorzystane/wynik_witkowski_as_function_karty_niewykorzystane.png)
 ![](charts/karty_niewykorzystane/wynik_zoltek_as_function_karty_niewykorzystane.png)
 
+In order to set the same maximum for both axis, not all data points were placed on chart.
+
 ### Discussion
 Why Duda's and Kosiniak's chart is significantly different than Trzaskowski's and all other candidates? I don't know.
 
