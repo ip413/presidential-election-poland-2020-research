@@ -4,7 +4,6 @@
 ```
 SELECT symbol_kontrolny, koperty_wrzucone_do_urny, karty_z_kopert, karty_z_kopert - koperty_wrzucone_do_urny as roznica_glosy_z_kopert, siedziba FROM runda1 where koperty_wrzucone_do_urny <> karty_z_kopert order by (koperty_wrzucone_do_urny - karty_z_kopert) DESC
 ```
-There is a view with this query in database, which is called: ```runda1_roznica_glosy_z_kopert```.
 
 ### Results
 
