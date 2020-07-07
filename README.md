@@ -34,6 +34,13 @@ Node example:
 node scripts_node/generate_chart.js --colX wynik_biedron_proc --colY glosy_niewazne_wiele_x_proc --show-chart
 ```
 
+SQL example:
+```
+select symbol_kontrolny, karty_niewazne, siedziba
+from runda1
+where karty_niewazne > 3
+order by karty_niewazne desc;
+```
 
 
 ## Data
