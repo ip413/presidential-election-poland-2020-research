@@ -3,20 +3,20 @@ set datafile separator comma
 set pointsize 0.5
 
 set terminal png small size 640, 480
-set output 'charts/results-official-vs-average-2.png'
+set output 'charts/results-official-vs-polling-stations-with-all-votes-valid.png'
 
 set xtic rotate
 # set yrange [0:0.3]
 
-set title "Official results vs average results"
+set title "Official results vs polling stations with all votes valid"
 
 set style fill solid
 set boxwidth 0.4
 
-plot "sql-queries/05-official-vs-average-transposed.csv" \
+plot "sql-queries/06-official-vs-polling-stations-all-votes-valid-transposed.csv" \
     using 2:xtic(1) \
     title "official" \
     with boxes, \
     "" using ($0 + 0.4):3 \
-    title "average" \
+    title "all valid" \
     with boxes
