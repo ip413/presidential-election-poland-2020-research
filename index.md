@@ -63,6 +63,8 @@ Invalid votes rate for rural areas where Trzaskowski and Holownia had good resul
 
 But once more we could see **Duda, Kosiniak, Piotrowski** in one group and **Biedroń, Bosak, Holownia, Trzaskowski, Witkowski** in another. Interesting!
 
+One more thing, **Duda, Kosiniak, Piotrowski** have better result in polling stations with high ratio of invalid votes and polling stations with no invalid votes. At the same context **Biedroń, Bosak, Holownia, Trzaskowski, Witkowski** have worse result. Something very interesting is happening here, or I made some mistake somewhere.
+
 
 ## Official result vs results from polling stations with all votes and ballots valid - round 1
 
