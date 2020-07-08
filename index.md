@@ -1,4 +1,4 @@
-## Official result vs average result in polling stations
+## Official result vs average result in polling stations - round 1
 
 ### SQL queries
 Official:
@@ -56,7 +56,7 @@ I don't know.
 Why average results could be meaningful, anyway? I don't know.
 
 
-## Invalid ballots
+## Invalid ballots - round 1
 
 ### SQL query
 ```sql
@@ -108,7 +108,7 @@ More data here [sql-queries/01-invalid-ballots.csv](sql-queries/01-invalid-ballo
 
 Because everyone is able to put into ballot box whatever he want... I think co conclusion could be made about this aspect. Maybe analysis about how many ballots were given to people and how many were pulled out from the box could answer some questions here.
 
-## Difference between votes from envelopes put in ballot box and pulled out 
+## Difference between votes from envelopes put in ballot box and pulled out  - round 1
 
 ### SQL query:
 ```
@@ -215,7 +215,7 @@ Why 125 votes were missing in Haga II, Ambasada RP (dawny WPHI) Van Lennepweg 51
 Why 87 polling stations had problems with with putting in and pulling out the same amount of votes from envelopes? Maybe some envelopes "with" votes were empty? Maybe some envelopes had more votes than one? Indeed, interesting! Even fascinating.
 
 
-## Candidate result as a function of unused ballot papers
+## Candidate result as a function of unused ballot papers - round 1
 
 ### Code used to generate charts
 ```
@@ -255,7 +255,7 @@ Why Duda's chart is significantly different than Trzaskowski's? I don't know.
 ![](charts/karty_niewykorzystane/wynik_trzaskowski_as_function_karty_niewykorzystane.png)
 
 
-## Candidate result as a function of invalid votes
+## Candidate result as a function of invalid votes - round 1
 
 ### Code used to generate charts
 ```
