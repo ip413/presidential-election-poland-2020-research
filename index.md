@@ -43,12 +43,17 @@ from runda1;
 
 
 ![](charts/results-official-vs-average.png)
+![](charts/results-official-vs-average-2.png)
 
 ### Discussion
 
-Why Duda and Kosiniak are the only candidates with significant result who have higher average than official result? Maybe because of rural areas?
+Why **Duda, Jakubiak, Kosiniak, Piotrowski, Tanajno, Żółtek** have higher average than official result?
 
-Why average results could be meaningful? I don't know.
+Why **Biedron, Bosak, Holownia, Trzaskowski, Witkowski** have higher official than average?
+
+I don't know.
+
+Why average results could be meaningful, anyway? I don't know.
 
 
 ## Invalid ballots
