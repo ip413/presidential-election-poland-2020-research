@@ -1,3 +1,50 @@
+## Percentage of invalid votes when candidate had result above official, rural and urban areas - round 1
+
+### SQL queries
+```sql
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="wieś" and wynik_biedron_proc > 2.2245829788509;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="wieś" and wynik_bosak_proc > 6.78136779580412;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="wieś" and wynik_duda_proc > 43.5023228273371;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="wieś" and wynik_holownia_proc > 13.8653193605736;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="wieś" and wynik_jakubiak_proc > 0.173224922025876;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="wieś" and wynik_kosiniak_proc > 2.36475776567495;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="wieś" and wynik_piotrowski_proc > 0.108442538633394;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="wieś" and wynik_tanajno_proc > 0.143675424197456;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="wieś" and wynik_trzaskowski_proc > 30.4620110317439;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="wieś" and wynik_witkowski_proc > 0.140488814588433;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="wieś" and wynik_zoltek_proc > 0.233806540570276;
+
+
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="miasto" and wynik_biedron_proc > 2.2245829788509;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="miasto" and wynik_bosak_proc > 6.78136779580412;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="miasto" and wynik_duda_proc > 43.5023228273371;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="miasto" and wynik_holownia_proc > 13.8653193605736;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="miasto" and wynik_jakubiak_proc > 0.173224922025876;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="miasto" and wynik_kosiniak_proc > 2.36475776567495;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="miasto" and wynik_piotrowski_proc > 0.108442538633394;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="miasto" and wynik_tanajno_proc > 0.143675424197456;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="miasto" and wynik_trzaskowski_proc > 30.4620110317439;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="miasto" and wynik_witkowski_proc > 0.140488814588433;
+select avg(glosy_niewazne_proc) from runda1 where typ_obszaru="miasto" and wynik_zoltek_proc > 0.233806540570276;
+```
+
+### Result
+
+![](charts/invalid-votes-result-above-official-rural.png)
+![](charts/invalid-votes-result-above-official-urban.png)
+
+### Discussion
+
+Mr. Bierdon... shame on you! :)
+
+Once again we could see two groups **Duda, Kosianiak, Piotrowski, Jakubiak** and **Bosak, Holownia, Trzaskowski, Witkowski, Tantajno**.
+
+The better result of any of them **Duda, Kosianiak, Piotrowski, Jakubiak**, the more invalid votes.
+
+The better result any of them **Bosak, Holownia, Trzaskowski, Witkowski, Tantajno**, the less invalid votes.
+
+Differences between groups, once more are not big, but significant. If we assume that in some polling stations some ballot cards were manipulated deliberately, there could also occurs other anomalies.
+
 ## Official result vs results from polling stations with low and high invalid votes - round 1
 
 
@@ -14,7 +61,7 @@ select (100.0 * sum(wynik_biedron)/wazne) as biedron,
     (100.0 * sum(wynik_jakubiak)/wazne) as jakubiak,
     (100.0 * sum(wynik_kosiniak)/wazne) as kosiniak,
     (100.0 * sum(wynik_piotrowski)/wazne) as piotrowski,
-    (100.0 * sum(wynik_tanajno)/wazne) as tanjano,
+    (100.0 * sum(wynik_tanajno)/wazne) as tanajno,
     (100.0 * sum(wynik_trzaskowski)/wazne) as trzaskowski,
     (100.0 * sum(wynik_witkowski)/wazne) as witkowski,
     (100.0 * sum(wynik_zoltek)/wazne) as zoltek
@@ -38,7 +85,7 @@ And one more query with ">" instead of "<=".
 |jakubiak   |0.173   |0.174      |0.001             |0.170       |-0.003             |
 |kosiniak   |2.365   |2.318      |-0.047            |2.543       |0.178              |
 |piotrowski |0.108   |0.108      |-0.001            |0.111       |0.002              |
-|tanjano    |0.144   |0.143      |0.000             |0.145       |0.001              |
+|tanajno    |0.144   |0.143      |0.000             |0.145       |0.001              |
 |trzaskowski|30.462  |31.644     |1.182             |25.980      |-4.482             |
 |witkowski  |0.140   |0.146      |0.006             |0.119       |-0.022             |
 |zoltek     |0.234   |0.236      |0.003             |0.224       |-0.009             |
@@ -77,7 +124,7 @@ select (100.0 * sum(wynik_biedron)/wazne) as biedron,
     (100.0 * sum(wynik_jakubiak)/wazne) as jakubiak,
     (100.0 * sum(wynik_kosiniak)/wazne) as kosiniak,
     (100.0 * sum(wynik_piotrowski)/wazne) as piotrowski,
-    (100.0 * sum(wynik_tanajno)/wazne) as tanjano,
+    (100.0 * sum(wynik_tanajno)/wazne) as tanajno,
     (100.0 * sum(wynik_trzaskowski)/wazne) as trzaskowski,
     (100.0 * sum(wynik_witkowski)/wazne) as witkowski,
     (100.0 * sum(wynik_zoltek)/wazne) as zoltek
@@ -97,7 +144,7 @@ select (100.0 * sum(wynik_biedron)/wazne) as biedron,
     (100.0 * sum(wynik_jakubiak)/wazne) as jakubiak,
     (100.0 * sum(wynik_kosiniak)/wazne) as kosiniak,
     (100.0 * sum(wynik_piotrowski)/wazne) as piotrowski,
-    (100.0 * sum(wynik_tanajno)/wazne) as tanjano,
+    (100.0 * sum(wynik_tanajno)/wazne) as tanajno,
     (100.0 * sum(wynik_trzaskowski)/wazne) as trzaskowski,
     (100.0 * sum(wynik_witkowski)/wazne) as witkowski,
     (100.0 * sum(wynik_zoltek)/wazne) as zoltek
@@ -108,7 +155,7 @@ from runda1,
 
 ### Result
 
-| ------    | biedron | bosak | duda  | holownia | jakubiak | kosiniak | piotrowski | tanjano | trzaskowski | witkowski | zoltek |
+| ------    | biedron | bosak | duda  | holownia | jakubiak | kosiniak | piotrowski | tanajno | trzaskowski | witkowski | zoltek |
 |-----------|---------|-------|-------|----------|----------|----------|------------|---------|-------------|-----------|--------|
 | official  | 2.22    | 6.78  | 43.50 | 13.87    | 0.17     | 2.36     | 0.11       | 0.14    | 30.46       | 0.14      | 0.23   |
 | all valid | 2.02    | 6.75  | 47.26 | 13.30    | 0.17     | 2.57     | 0.11       | 0.14    | 27.32       | 0.12      | 0.22   |
@@ -139,7 +186,7 @@ select (100.0 * sum(wynik_biedron)/wazne) as biedron,
     (100.0 * sum(wynik_jakubiak)/wazne) as jakubiak,
     (100.0 * sum(wynik_kosiniak)/wazne) as kosiniak,
     (100.0 * sum(wynik_piotrowski)/wazne) as piotrowski,
-    (100.0 * sum(wynik_tanajno)/wazne) as tanjano,
+    (100.0 * sum(wynik_tanajno)/wazne) as tanajno,
     (100.0 * sum(wynik_trzaskowski)/wazne) as trzaskowski,
     (100.0 * sum(wynik_witkowski)/wazne) as witkowski,
     (100.0 * sum(wynik_zoltek)/wazne) as zoltek
@@ -165,7 +212,7 @@ from runda1;
 
 ### Result
 
-|          | biedron | bosak | duda  | holownia | jakubiak | kosiniak | piotrowski | tanjano | trzaskowski | witkowski | zoltek |
+|          | biedron | bosak | duda  | holownia | jakubiak | kosiniak | piotrowski | tanajno | trzaskowski | witkowski | zoltek |
 |----------|---------|-------|-------|----------|----------|----------|------------|---------|-------------|-----------|--------|
 | official | 2.22    | 6.78  | 43.50 | 13.87    | 0.17     | 2.36     | 0.11       | 0.14    | 30.46       | 0.14      | 0.23   |
 | avgerage | 2.03    | 6.51  | 48.99 | 12.81    | 0.20     | 2.60     | 0.13       | 0.15    | 26.19       | 0.13      | 0.24   |
