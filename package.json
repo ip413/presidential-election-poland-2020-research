@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/ip413/wybory-prez-2020#readme",
   "dependencies": {
+    "csvtojson": "^2.0.10",
+    "just-skewness": "^1.0.2",
+    "stats-lite": "^2.2.0",
     "yargs": "^15.4.0"
   }
 }

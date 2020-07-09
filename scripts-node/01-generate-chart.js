@@ -11,7 +11,7 @@ const fs = require('fs');
 const { argv } = require('yargs');
 const { exec } = require("child_process");
 
-const columns_number = require('./columns_number.json');
+const columns_number = require('./00-columns-number.json');
 
 const colX = argv.colX;
 const colY = argv.colY;

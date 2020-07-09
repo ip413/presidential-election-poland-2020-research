@@ -1,3 +1,108 @@
+## Polling stations with the same address and high and low standard deviation on results - round 1
+
+### SQL query
+```sql
+select symbol_kontrolny, typ_obszaru, numer_obwodu, siedziba, wyborcy_uprawnieni, glosy_niewazne + karty_niewazne as niewazne, wynik_duda_proc, wynik_trzaskowski_proc, wynik_holownia_proc, wynik_bosak_proc, wynik_kosiniak_proc 
+from runda1 where siedziba in (SELECT siedziba FROM runda1 GROUP BY siedziba HAVING COUNT(siedziba)>1) 
+order by siedziba;
+```
+Plus node script [scripts-node/02-standard-deviation-and-skew.js](scripts-node/02-standard-deviation-and-skew.js)
+
+### Results and discussion
+
+Eight files:
+* [scripts-node-results/02-skew-standard-deviation-address-asc.json](scripts-node-results/02-skew-standard-deviation-address-asc.json)
+* [scripts-node-results/02-skew-standard-deviation-address-desc.json](scripts-node-results/02-skew-standard-deviation-address-desc.json)
+* [scripts-node-results/02-skew-standard-deviation-asc.json](scripts-node-results/02-skew-standard-deviation-asc.json)
+* [scripts-node-results/02-skew-standard-deviation-desc.json](scripts-node-results/02-skew-standard-deviation-desc.json)
+* [scripts-node-results/02-standard-deviation-address-asc.json](scripts-node-results/02-standard-deviation-address-asc.json)
+* [scripts-node-results/02-standard-deviation-address-desc.json](scripts-node-results/02-standard-deviation-address-desc.json)
+* [scripts-node-results/02-standard-deviation-asc.json](scripts-node-results/02-standard-deviation-asc.json)
+* [scripts-node-results/02-standard-deviation-desc.json](scripts-node-results/02-standard-deviation-desc.json)
+
+Files with "skew" in name are using using Pearson's second skewness coefficient but are sorted by standard deviation of skew for all voting points at the same address.
+
+Files with "desc" should contain the most different results at the top. "Asc" the least different.
+Since skew works for three or more values, all "skew" files contains at least three voting points at the same address.
+
+If you want to look for suspicious polling stations you should look at files with "desc" in name and search from the top - the higher position in file, the more suspicious polling station, at least form standard deviation's point of view.
+
+If you are interested only in addresses of suspicious polling stations you can look at files with "addresses" in name.
+
+
+Some sample from the top of the [scripts-node-results/02-skew-standard-deviation-desc.json](scripts-node-results/02-skew-standard-deviation-desc.json) file:
+```json
+{
+        "duda": [
+            "49.1039426523298",
+            "35.5836849507736",
+            "40.4225352112676",
+            "40.5048076923077"
+        ],
+        "trzaskowski": [
+            "18.2795698924731",
+            "27.7074542897328",
+            "22.2535211267606",
+            "25"
+        ],
+        "holownia": [
+            "19.9522102747909",
+            "25.5977496483826",
+            "22.9577464788732",
+            "23.1971153846154"
+        ],
+        "bosak": [
+            "9.08004778972521",
+            "8.15752461322082",
+            "9.01408450704225",
+            "8.29326923076923"
+        ],
+        "kosiniak": [
+            "1.0752688172043",
+            "0.843881856540084",
+            "1.40845070422535",
+            "0.721153846153846"
+        ],
+        "duda_stdev": 4.8717810858604205,
+        "duda_stdev_percent_of_mean": 11.76652345124551,
+        "trzaskowski_stdev": 3.4862257110040673,
+        "trzaskowski_stdev_percent_of_mean": 14.955835787754937,
+        "holownia_stdev": 2.003508343834287,
+        "holownia_stdev_percent_of_mean": 8.73894438613122,
+        "bosak_stdev": 0.41428528682601407,
+        "bosak_stdev_percent_of_mean": 4.797060907155606,
+        "kosiniak_stdev": 0.26173992668670526,
+        "kosiniak_stdev_percent_of_mean": 25.858804713822945,
+        "skews": [
+            0.20078549969513823,
+            -1.2462671896943176,
+            -0.6104439662629726,
+            -0.7063339887463908
+        ],
+        "skews_stdev": 0.5171988512633905,
+        "sum_stdev": 11.037540354211494,
+        "id": "ZespółSzkolnoPrzedszkolnyNr5ulMagnoliowa1315669Białystok",
+        "siedziba": "Zespół Szkolno-Przedszkolny Nr 5, ul. Magnoliowa 13, 15-669 Białystok"
+    }
+```
+It looks like someone took 10 pp from **Trzaskowski** and put it into **Duda** result. Why all polling stations have the same result except one? All stations are placed in one building! Of course, it could be coincidence. Large family who love Duda could live on one street...
+
+These are the other examples:
+
+Address: Zespół Szkolno-Przedszkolny Nr 5, ul. Magnoliowa 13, 15-669 Białystok
+![Zespół Szkolno-Przedszkolny Nr 5, ul. Magnoliowa 13, 15-669 Białystok](charts/one-polling-station-bialystok-school-5.png)
+
+Address: Szkoła Podstawowa nr 30 im. Króla Kazimierza Wielkiego, ul. Nałkowskich 110, 20-470 Lublin
+![Szkoła Podstawowa nr 30 im. Króla Kazimierza Wielkiego, ul. Nałkowskich 110, 20-470 Lublin](charts/one-polling-station-lublin-school-30.png)
+
+
+And this is show it should like for polling stations with hundreds of votes.
+
+Address: Szkoła Podstawowa Nr 357, ul. Zachodzącego Słońca 25, 01-495 Warszawa
+![Szkoła Podstawowa Nr 357, ul. Zachodzącego Słońca 25, 01-495 Warszawa](charts/one-polling-station-warsaw-school-357.png)
+
+
+
 ## Percentage of invalid votes when candidate had result above official, rural and urban areas - round 1
 
 ### SQL queries
