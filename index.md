@@ -101,7 +101,7 @@ We have two groups:
     * **Biedroń, Bosak, Holownia, Jakubiak, Trzaskowski, Witkowski, Żółtek** had better results than official
     * **Duda, Kosiniak, Piotrowski** had worse results than official
 * for polling stations with high rate of invalid votes
-    * **Duda, Kosiniak, Piotrowski, Tanjano** had better results than official
+    * **Duda, Kosiniak, Piotrowski, Tanajno** had better results than official
     * **Biedroń, Bosak, Holownia, Jakubiak, Trzaskowski, Witkowski, Żółtek** had wore results than official
 
 What is the reason of this? Hard to say. Probably there is some corelation between invalid votes and rural areas where Duda and Piotrowski had many voters.
