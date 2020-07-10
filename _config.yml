@@ -7,3 +7,5 @@ relative_links:
   collections: true
 theme: jekyll-theme-cayman
 paginate: 5
+include:
+ - _pages
