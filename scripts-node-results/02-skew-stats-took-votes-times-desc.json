@@ -1,0 +1,79 @@
+[
+    {
+        "tookVotesSum": 32.49563179251092,
+        "tookVotesTimes": 253,
+        "takenFromSum": -8.978437533749295,
+        "takenFromTimes": 122,
+        "id": "witkowski"
+    },
+    {
+        "tookVotesSum": 28.316723955838686,
+        "tookVotesTimes": 251,
+        "takenFromSum": -7.800301516275881,
+        "takenFromTimes": 114,
+        "id": "piotrowski"
+    },
+    {
+        "tookVotesSum": 28.95586696477078,
+        "tookVotesTimes": 244,
+        "takenFromSum": -11.831660446181719,
+        "takenFromTimes": 140,
+        "id": "jakubiak"
+    },
+    {
+        "tookVotesSum": 27.53507335844029,
+        "tookVotesTimes": 232,
+        "takenFromSum": -10.498685784352594,
+        "takenFromTimes": 143,
+        "id": "tanajno"
+    },
+    {
+        "tookVotesSum": 75.40682209665208,
+        "tookVotesTimes": 226,
+        "takenFromSum": -54.08612953349849,
+        "takenFromTimes": 165,
+        "id": "kosiniak"
+    },
+    {
+        "tookVotesSum": 319.32281610558874,
+        "tookVotesTimes": 220,
+        "takenFromSum": -163.45634556656273,
+        "takenFromTimes": 171,
+        "id": "holownia"
+    },
+    {
+        "tookVotesSum": 460.3698532682983,
+        "tookVotesTimes": 217,
+        "takenFromSum": -368.8043374501884,
+        "takenFromTimes": 174,
+        "id": "trzaskowski"
+    },
+    {
+        "tookVotesSum": 27.09355494648823,
+        "tookVotesTimes": 214,
+        "takenFromSum": -14.994564925509202,
+        "takenFromTimes": 175,
+        "id": "zoltek"
+    },
+    {
+        "tookVotesSum": 81.9848735667558,
+        "tookVotesTimes": 209,
+        "takenFromSum": -69.3526537808046,
+        "takenFromTimes": 182,
+        "id": "biedron"
+    },
+    {
+        "tookVotesSum": 180.06624555024956,
+        "tookVotesTimes": 205,
+        "takenFromSum": -121.12658139111068,
+        "takenFromTimes": 186,
+        "id": "bosak"
+    },
+    {
+        "tookVotesSum": 458.0914579052149,
+        "tookVotesTimes": 170,
+        "takenFromSum": -655.1685081075926,
+        "takenFromTimes": 221,
+        "id": "duda"
+    }
+]

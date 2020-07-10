@@ -3,13 +3,17 @@ const csv2json = require('csvtojson');
 const stats = require('stats-lite');
 const skewness = require('just-skewness');
 
-// const DATA_FILE_PATH = 'sql-queries/10-results-from-polling-stations-with-the-same-address-DEV-SAMPLE.csv';
-const DATA_FILE_PATH = 'sql-queries/10-results-from-polling-stations-with-the-same-address.csv';
+const DEV_DATA = false;
+
+const DATA_FILE_PATH = `sql-queries/10-results-from-polling-stations-with-the-same-address${DEV_DATA ? '-DEV-SAMPLE': ''}.csv`;
+const CANDIDATES = ['biedron', 'bosak', 'duda', 'holownia', 'jakubiak', 'kosiniak', 'piotrowski', 'tanajno', 'trzaskowski', 'witkowski', 'zoltek'];
 
 let dataJson;
 const pollingStationsMap = {};
 const sortedByStandardDeviationDesc = [];
 let sortedByStandardDeviationAsc;
+let skewWeightedResult = {};
+let skewWeightedStats = {};
 
 let sortedBySkewDesc;
 let sortedBySkewAsc;
@@ -27,22 +31,54 @@ async function main() {
     addIdsToResult();
     splitResultsToDescAndAsc();
     filterAndSortBySkew();
+
+    saveSkewFiles();
+
     saveResultsToFiles();
+    // console.log(sortedBySkewDesc.reverse());
+    // console.log(sortedBySkewDesc.length, sortedBySkewAsc.length);
     return new Promise(() => { });
 }
 
+function saveSkewFiles() {
+    CANDIDATES.forEach(candidate => {
+        fs.writeFileSync(`scripts-node-results/02-skew-stats-${candidate}-took-votes.json`, sanitizeAndStringify(skewWeightedResult[`${candidate}TookVotes`]));
+        fs.writeFileSync(`scripts-node-results/02-skew-stats-${candidate}-taken-from.json`, sanitizeAndStringify(skewWeightedResult[`${candidate}TakenFrom`]));
+    });
+
+    // fs.writeFileSync('scripts-node-results/temp.json', JSON.stringify(skewWeightedResult, null, 4));
+    // fs.writeFileSync('scripts-node-results/temp-stats.json', JSON.stringify(skewWeightedStats, null, 4));
+
+    for (let key in skewWeightedStats) {
+        skewWeightedStats[key].id = key;
+    }
+    let statsArray = Object.values(skewWeightedStats);
+
+    fs.writeFileSync('scripts-node-results/02-skew-stats-took-votes-sum-desc.json', JSON.stringify(statsArray.sort((a, b) => b.tookVotesSum - a.tookVotesSum), null, 4));
+    fs.writeFileSync('scripts-node-results/02-skew-stats-took-votes-times-desc.json', JSON.stringify(statsArray.sort((a, b) => b.tookVotesTimes - a.tookVotesTimes), null, 4));
+
+    fs.writeFileSync('scripts-node-results/02-skew-stats-taken-from-sum-asc.json', JSON.stringify(statsArray.sort((a, b) => a.takenFromSum - b.takenFromSum), null, 4));
+    fs.writeFileSync('scripts-node-results/02-skew-stats-taken-from-times-desc.json', JSON.stringify(statsArray.sort((a, b) => b.takenFromTimes - a.takenFromTimes), null, 4));
+}
+
 function saveResultsToFiles() {
-    fs.writeFileSync('scripts-node-results/02-standard-deviation-desc.json', JSON.stringify(sortedBySkewDesc, null, 4));
-    fs.writeFileSync('scripts-node-results/02-standard-deviation-asc.json', JSON.stringify(sortedBySkewAsc, null, 4));
+    // fs.writeFileSync('scripts-node-results/02-skew-standard-deviation-desc.json', sanitizeAndStringify(sortedBySkewDesc));
+    // fs.writeFileSync('scripts-node-results/02-skew-standard-deviation-asc.json', sanitizeAndStringify(sortedBySkewAsc));
 
-    fs.writeFileSync('scripts-node-results/02-skew-standard-deviation-desc.json', JSON.stringify(sortedBySkewDesc, null, 4));
-    fs.writeFileSync('scripts-node-results/02-skew-standard-deviation-asc.json', JSON.stringify(sortedBySkewAsc, null, 4));
+    // fs.writeFileSync('scripts-node-results/02-standard-deviation-address-desc.json', JSON.stringify(sortedByStandardDeviationDesc.map(value => value.siedziba), null, 4));
+    // fs.writeFileSync('scripts-node-results/02-standard-deviation-address-asc.json', JSON.stringify(sortedByStandardDeviationAsc.map(value => value.siedziba), null, 4));
+}
 
-    fs.writeFileSync('scripts-node-results/02-standard-deviation-address-desc.json', JSON.stringify(sortedByStandardDeviationDesc.map(value => value.siedziba), null, 4));
-    fs.writeFileSync('scripts-node-results/02-standard-deviation-address-asc.json', JSON.stringify(sortedByStandardDeviationAsc.map(value => value.siedziba), null, 4));
+function sanitizeAndStringify(obj) {
+    if(obj.forEach) {
+        obj.forEach(v => {
+            delete v.stdev;
+            delete v.skew;
+            delete v.id;
+        })
+    }
 
-    fs.writeFileSync('scripts-node-results/02-skew-standard-deviation-address-desc.json', JSON.stringify(sortedBySkewDesc.map(value => value.siedziba), null, 4));
-    fs.writeFileSync('scripts-node-results/02-skew-standard-deviation-address-asc.json', JSON.stringify(sortedBySkewAsc.map(value => value.siedziba), null, 4));
+    return JSON.stringify(obj, null, 4);
 }
 
 /**
@@ -50,23 +86,44 @@ function saveResultsToFiles() {
  */
 function filterAndSortBySkew() {
     sortedBySkewDesc = sortedBySkewDesc.filter(value => value.duda.length > 2);
-    sortedBySkewAsc = sortedBySkewAsc.filter(value => value.duda.length > 2);
+    // sortedBySkewAsc = sortedBySkewAsc.filter(value => value.duda.length > 2);
 
-    sortedBySkewDesc = sortedBySkewDesc.sort((a, b) => {
-        return b.skews_stdev - a.skews_stdev;
+    CANDIDATES.forEach(candidate => {
+        skewWeightedResult[`${candidate}TookVotes`] = sortedBySkewDesc.filter(v => v.skewWeighted[candidate] > 0);
+        skewWeightedResult[`${candidate}TookVotes`] = skewWeightedResult[`${candidate}TookVotes`].sort((a, b) => b.skewWeighted[candidate] - a.skewWeighted[candidate]);
+
+        skewWeightedResult[`${candidate}TakenFrom`] = sortedBySkewDesc.filter(v => v.skewWeighted[candidate] < 0);
+        skewWeightedResult[`${candidate}TakenFrom`] = skewWeightedResult[`${candidate}TakenFrom`].sort((a, b) => a.skewWeighted[candidate] - b.skewWeighted[candidate]);
     });
 
-    sortedBySkewAsc = sortedBySkewAsc.sort((a, b) => {
-        return a.skews_stdev - b.skews_stdev;
+    CANDIDATES.forEach(candidate => {
+        skewWeightedStats[candidate] = {};
+        skewWeightedStats[candidate].tookVotes = skewWeightedResult[`${candidate}TookVotes`].map(v => v.skewWeighted[candidate])
+        skewWeightedStats[candidate].tookVotesSum = stats.sum(skewWeightedStats[candidate].tookVotes);
+        skewWeightedStats[candidate].tookVotesTimes = skewWeightedStats[candidate].tookVotes.length;
+        delete skewWeightedStats[candidate].tookVotes;
+
+        skewWeightedStats[candidate].takenFrom = skewWeightedResult[`${candidate}TakenFrom`].map(v => v.skewWeighted[candidate])
+        skewWeightedStats[candidate].takenFromSum = stats.sum(skewWeightedStats[candidate].takenFrom);
+        skewWeightedStats[candidate].takenFromTimes = skewWeightedStats[candidate].takenFrom.length;
+        delete skewWeightedStats[candidate].takenFrom;
     });
+
+    
+
+
+    // sortedBySkewAsc = sortedBySkewAsc.sort((a, b) => {
+    //     return a.skews_stdev - b.skews_stdev;
+    // });
 }
 
 function splitResultsToDescAndAsc() {
     sortedByStandardDeviationAsc = sortedByStandardDeviationDesc.slice(-1 + Math.floor(sortedByStandardDeviationDesc.length / 2)).reverse();
     sortedByStandardDeviationDesc.splice(Math.ceil(sortedByStandardDeviationDesc.length / 2));
 
-    sortedBySkewAsc = sortedBySkewDesc.slice(-1 + Math.floor(sortedBySkewDesc.length / 2)).reverse();
-    sortedBySkewDesc.splice(Math.ceil(sortedBySkewDesc.length / 2));
+    // sortedBySkewAsc = sortedBySkewDesc.slice().reverse();
+    // sortedBySkewAsc = sortedBySkewDesc.slice(-1 + Math.floor(sortedBySkewDesc.length / 2)).reverse();
+    // sortedBySkewDesc.splice(Math.ceil(sortedBySkewDesc.length / 2));
 }
 
 function addIdsToResult() {
@@ -94,7 +151,7 @@ function sortByStandardDeviation() {
     }
 
     sortedByStandardDeviationDesc.sort((a, b) => {
-        return b.sum_stdev - a.sum_stdev;
+        return b.stdevSum - a.stdevSum;
     });
 }
 
@@ -106,43 +163,34 @@ function sortBySkew() {
     }
 
     sortedBySkewDesc.sort((a, b) => {
-        return b.skews_stdev - a.skews_stdev;
+        return b.skewWeighted.duda - a.skewWeighted.duda;
     });
 }
-
 
 function calcStandardDeviationAndSkew() {
     for (let [key, value] of Object.entries(pollingStationsMap)) {
 
-        value.duda_stdev = stats.stdev(pollingStationsMap[key].duda);
-        value.duda_stdev_percent_of_mean = 100 * value.duda_stdev / stats.mean(pollingStationsMap[key].duda);
-
-        value.trzaskowski_stdev = stats.stdev(pollingStationsMap[key].trzaskowski);
-        value.trzaskowski_stdev_percent_of_mean = 100 * value.trzaskowski_stdev / stats.mean(pollingStationsMap[key].trzaskowski);
-
-        value.holownia_stdev = stats.stdev(pollingStationsMap[key].holownia);
-        value.holownia_stdev_percent_of_mean = 100 * value.holownia_stdev / stats.mean(pollingStationsMap[key].holownia);
-
-        value.bosak_stdev = stats.stdev(pollingStationsMap[key].bosak);
-        value.bosak_stdev_percent_of_mean = 100 * value.bosak_stdev / stats.mean(pollingStationsMap[key].bosak);
-
-        value.kosiniak_stdev = stats.stdev(pollingStationsMap[key].kosiniak);
-        value.kosiniak_stdev_percent_of_mean = 100 * value.kosiniak_stdev / stats.mean(pollingStationsMap[key].kosiniak);
-
-        let skews = [];
-        pollingStationsMap[key].duda.forEach((dudaValue, index) => {
-
-            let skew = skewness(+pollingStationsMap[key].duda[index],
-                +pollingStationsMap[key].trzaskowski[index],
-                +pollingStationsMap[key].holownia[index],
-                +pollingStationsMap[key].bosak[index],
-                +pollingStationsMap[key].kosiniak[index]);
-            skews.push(skew);
+        value.stdev = {};
+        CANDIDATES.forEach(candidate => {
+            value.stdev[candidate + '_stdev'] = stats.stdev(pollingStationsMap[key][candidate]);
         });
 
-        value.skews = skews;
-        value.skews_stdev = stats.stdev(skews);
-        value.sum_stdev = value.duda_stdev + value.trzaskowski_stdev + value.holownia_stdev + value.bosak_stdev + value.kosiniak_stdev;
+        value.skew = {};
+        CANDIDATES.forEach(candidate => {
+            value.skew[candidate] = skewness(pollingStationsMap[key][candidate].map(v => +v));
+
+            if (isNaN(value.skew[candidate])) {
+                value.skew[candidate] = 0;
+            }
+        });
+
+        value.skewWeighted = {};
+        CANDIDATES.forEach(candidate => {
+            value.skewWeighted[candidate] = value.skew[candidate] * stats.stdev(pollingStationsMap[key][candidate]);
+        });
+
+        value.stdevSkew = stats.stdev(Object.values(value.skew));
+        value.stdevSum = stats.sum(Object.values(value.stdev));
     }
 }
 
@@ -152,19 +200,14 @@ function makePollingStationMap() {
         let id = value.siedziba.replace(/[^A-Za-z0-9ążźćńłóęśĄŻŹĆŃŁÓĘŚ]/g, '');
         value.id = id;
         if (!pollingStationsMap[id]) {
-            pollingStationsMap[id] = {
-                duda: [value.wynik_duda_proc],
-                trzaskowski: [value.wynik_trzaskowski_proc],
-                holownia: [value.wynik_holownia_proc],
-                bosak: [value.wynik_bosak_proc],
-                kosiniak: [value.wynik_kosiniak_proc]
-            };
+            pollingStationsMap[id] = {};
+            CANDIDATES.forEach(candidate => {
+                pollingStationsMap[id][candidate] = [+value[`wynik_${candidate}_proc`]]    
+            });
         } else {
-            pollingStationsMap[id].duda.push(value.wynik_duda_proc);
-            pollingStationsMap[id].trzaskowski.push(value.wynik_trzaskowski_proc);
-            pollingStationsMap[id].holownia.push(value.wynik_holownia_proc);
-            pollingStationsMap[id].bosak.push(value.wynik_bosak_proc);
-            pollingStationsMap[id].kosiniak.push(value.wynik_kosiniak_proc);
+            CANDIDATES.forEach(candidate => {
+                pollingStationsMap[id][candidate].push(+value[`wynik_${candidate}_proc`]);
+            })
         }
     });
 }
