@@ -32,60 +32,74 @@ If you are interested only in addresses of suspicious polling stations you can l
 
 Some sample from the top of the [scripts-node-results/02-skew-standard-deviation-desc.json](scripts-node-results/02-skew-standard-deviation-desc.json) file:
 ```json
-{
-        "duda": [
-            "49.1039426523298",
-            "35.5836849507736",
-            "40.4225352112676",
-            "40.5048076923077"
-        ],
-        "trzaskowski": [
-            "18.2795698924731",
-            "27.7074542897328",
-            "22.2535211267606",
-            "25"
-        ],
-        "holownia": [
-            "19.9522102747909",
-            "25.5977496483826",
-            "22.9577464788732",
-            "23.1971153846154"
+        "biedron": [
+            1.6726403823178,
+            1.54711673699015,
+            2.95774647887324,
+            1.68269230769231
         ],
         "bosak": [
-            "9.08004778972521",
-            "8.15752461322082",
-            "9.01408450704225",
-            "8.29326923076923"
+            9.08004778972521,
+            8.15752461322082,
+            9.01408450704225,
+            8.29326923076923
+        ],
+        "duda": [
+            49.1039426523298,
+            35.5836849507736,
+            40.4225352112676,
+            40.5048076923077
+        ],
+        "holownia": [
+            19.9522102747909,
+            25.5977496483826,
+            22.9577464788732,
+            23.1971153846154
+        ],
+        "jakubiak": [
+            0.2389486260454,
+            0.281293952180028,
+            0.422535211267606,
+            0.240384615384615
         ],
         "kosiniak": [
-            "1.0752688172043",
-            "0.843881856540084",
-            "1.40845070422535",
-            "0.721153846153846"
+            1.0752688172043,
+            0.843881856540084,
+            1.40845070422535,
+            0.721153846153846
         ],
-        "duda_stdev": 4.8717810858604205,
-        "duda_stdev_percent_of_mean": 11.76652345124551,
-        "trzaskowski_stdev": 3.4862257110040673,
-        "trzaskowski_stdev_percent_of_mean": 14.955835787754937,
-        "holownia_stdev": 2.003508343834287,
-        "holownia_stdev_percent_of_mean": 8.73894438613122,
-        "bosak_stdev": 0.41428528682601407,
-        "bosak_stdev_percent_of_mean": 4.797060907155606,
-        "kosiniak_stdev": 0.26173992668670526,
-        "kosiniak_stdev_percent_of_mean": 25.858804713822945,
-        "skews": [
-            0.20078549969513823,
-            -1.2462671896943176,
-            -0.6104439662629726,
-            -0.7063339887463908
+        "piotrowski": [
+            0.1194743130227,
+            0.140646976090014,
+            0,
+            0
         ],
-        "skews_stdev": 0.5171988512633905,
-        "sum_stdev": 11.037540354211494,
-        "id": "ZespółSzkolnoPrzedszkolnyNr5ulMagnoliowa1315669Białystok",
-        "siedziba": "Zespół Szkolno-Przedszkolny Nr 5, ul. Magnoliowa 13, 15-669 Białystok"
-    }
+        "tanajno": [
+            0.3584229390681,
+            0,
+            0,
+            0
+        ],
+        "trzaskowski": [
+            18.2795698924731,
+            27.7074542897328,
+            22.2535211267606,
+            25
+        ],
+        "witkowski": [
+            0,
+            0,
+            0.28169014084507,
+            0.240384615384615
+        ],
+        "zoltek": [
+            0.1194743130227,
+            0.140646976090014,
+            0.28169014084507,
+            0.120192307692308
+        ],
 ```
-It looks like someone took 10 pp from **Trzaskowski** and put it into **Duda** result. Why all polling stations have the same result except one? All stations are placed in one building! Of course, it could be coincidence. Large family who love Duda could live on one street...
+It looks like someone took 10 pp from **Trzaskowski** and put it into **Duda** result. Why all polling stations at the same address have the same result except one? All stations are placed in one building! Of course, it could be coincidence. But I don't think so.
 
 These are the other examples:
 
