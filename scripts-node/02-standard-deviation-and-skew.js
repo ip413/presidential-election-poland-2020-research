@@ -15,9 +15,6 @@ let sortedByStandardDeviationAsc;
 let skewWeightedResult = {};
 let skewWeightedStats = {};
 
-let sortedBySkewDesc;
-let sortedBySkewAsc;
-
 main();
 
 async function main() {
@@ -40,10 +37,29 @@ async function main() {
     return new Promise(() => { });
 }
 
+function addIdsToResult() {
+    sortedByStandardDeviationDesc.forEach(element => {
+        dataJson.some((value) => {
+            if (value.id === element.id) {
+                element.siedziba = value.siedziba;
+            }
+        })
+    });
+
+    sortedBySkewDesc.forEach(element => {
+        dataJson.some((value) => {
+            if (value.id === element.id) {
+                element.siedziba = value.siedziba;
+            }
+        })
+    });
+}
+
+
 function saveSkewFiles() {
     CANDIDATES.forEach(candidate => {
-        fs.writeFileSync(`scripts-node-results/02-skew-stats-${candidate}-took-votes.json`, sanitizeAndStringify(skewWeightedResult[`${candidate}TookVotes`]));
-        fs.writeFileSync(`scripts-node-results/02-skew-stats-${candidate}-taken-from.json`, sanitizeAndStringify(skewWeightedResult[`${candidate}TakenFrom`]));
+        fs.writeFileSync(`scripts-node-results/02-skew-${candidate}-took-votes.json`, sanitizeAndStringify(skewWeightedResult[`${candidate}TookVotes`]));
+        fs.writeFileSync(`scripts-node-results/02-skew-${candidate}-taken-from.json`, sanitizeAndStringify(skewWeightedResult[`${candidate}TakenFrom`]));
     });
 
     // fs.writeFileSync('scripts-node-results/temp.json', JSON.stringify(skewWeightedResult, null, 4));
@@ -62,8 +78,8 @@ function saveSkewFiles() {
 }
 
 function saveResultsToFiles() {
-    // fs.writeFileSync('scripts-node-results/02-skew-standard-deviation-desc.json', sanitizeAndStringify(sortedBySkewDesc));
-    // fs.writeFileSync('scripts-node-results/02-skew-standard-deviation-asc.json', sanitizeAndStringify(sortedBySkewAsc));
+    fs.writeFileSync('scripts-node-results/02-skew-standard-deviation-desc.json', sanitizeAndStringify(sortedByStandardDeviationDesc));
+    fs.writeFileSync('scripts-node-results/02-skew-standard-deviation-asc.json', sanitizeAndStringify(sortedByStandardDeviationDesc.reverse()));
 
     // fs.writeFileSync('scripts-node-results/02-standard-deviation-address-desc.json', JSON.stringify(sortedByStandardDeviationDesc.map(value => value.siedziba), null, 4));
     // fs.writeFileSync('scripts-node-results/02-standard-deviation-address-asc.json', JSON.stringify(sortedByStandardDeviationAsc.map(value => value.siedziba), null, 4));
@@ -85,14 +101,13 @@ function sanitizeAndStringify(obj) {
  * Pearson's second skewness coefficient makes sense only for at least three values
  */
 function filterAndSortBySkew() {
-    sortedBySkewDesc = sortedBySkewDesc.filter(value => value.duda.length > 2);
-    // sortedBySkewAsc = sortedBySkewAsc.filter(value => value.duda.length > 2);
+    let usefulForSkew = Object.entries(pollingStationsMap).map(v => v[1]).filter(value => value.duda.length > 2);
 
     CANDIDATES.forEach(candidate => {
-        skewWeightedResult[`${candidate}TookVotes`] = sortedBySkewDesc.filter(v => v.skewWeighted[candidate] > 0);
+        skewWeightedResult[`${candidate}TookVotes`] = usefulForSkew.filter(v => v.skewWeighted[candidate] > 0);
         skewWeightedResult[`${candidate}TookVotes`] = skewWeightedResult[`${candidate}TookVotes`].sort((a, b) => b.skewWeighted[candidate] - a.skewWeighted[candidate]);
 
-        skewWeightedResult[`${candidate}TakenFrom`] = sortedBySkewDesc.filter(v => v.skewWeighted[candidate] < 0);
+        skewWeightedResult[`${candidate}TakenFrom`] = usefulForSkew.filter(v => v.skewWeighted[candidate] < 0);
         skewWeightedResult[`${candidate}TakenFrom`] = skewWeightedResult[`${candidate}TakenFrom`].sort((a, b) => a.skewWeighted[candidate] - b.skewWeighted[candidate]);
     });
 
@@ -126,24 +141,6 @@ function splitResultsToDescAndAsc() {
     // sortedBySkewDesc.splice(Math.ceil(sortedBySkewDesc.length / 2));
 }
 
-function addIdsToResult() {
-    sortedByStandardDeviationDesc.forEach(element => {
-        dataJson.some((value) => {
-            if (value.id === element.id) {
-                element.siedziba = value.siedziba;
-            }
-        })
-    });
-
-    sortedBySkewDesc.forEach(element => {
-        dataJson.some((value) => {
-            if (value.id === element.id) {
-                element.siedziba = value.siedziba;
-            }
-        })
-    });
-}
-
 function sortByStandardDeviation() {
     for (let [key, value] of Object.entries(pollingStationsMap)) {
         sortedByStandardDeviationDesc.push(value);
@@ -161,6 +158,9 @@ function sortBySkew() {
         sortedBySkewDesc.push(value);
         value.id = key;
     }
+
+
+    // console.log(sortedBySkewDesc.filter, Object.entries(pollingStationsMap).filter)
 
     sortedBySkewDesc.sort((a, b) => {
         return b.skewWeighted.duda - a.skewWeighted.duda;
