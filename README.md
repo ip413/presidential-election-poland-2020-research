@@ -8,7 +8,7 @@
 ](https://www.wykop.pl/artykul/5582715/analiza-porownawcza-ilosci-glosow-niewaznych-vs-wyniki-wyborow-w-okregach-gt/
 ) - thank you guys!
 
-**WARNING** - process of cleaning up whole repo is still in progress, so many paths doesn't work, just check for the input/output file paths
+**WARNING** - process of cleaning up whole repo is still in progress, so many paths doesn't work, most of the code is ugly etc.
 
 ## Dependencies
 Older versions could work also... or not.
@@ -56,9 +56,7 @@ order by karty_niewazne desc;
 
 ## Results
 
-There is so many interesting things in such simple thing like presidential election, especially when political scene is so polarized.
-
-For example:
+There is so many interesting things in such simple thing like presidential election, for example:
 * some candidates have official result above average from polling stations and some below:
     ![](script/../scripts/001-official-vs-average/results/results-official-vs-average.png)
 * some have higher results form polling stations with high ratio of invalid votes, some lower
