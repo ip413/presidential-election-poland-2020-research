@@ -15,6 +15,7 @@ Older versions could work also... or not.
 * gnuplot 5.2
 * sqlite 3.22
 * node 12.14.1
+* r 4.0.0
 
 ## Preparation
 
@@ -34,8 +35,10 @@ Just play around with csv, ods or sqlite3 files. No GUI, sorry.
 
 Scripts are located in ```scripts``` dir and results in ```scripts/results```.
 
+Common sql queries with results are places in ```sql-queries``` dir.
 
-Gnuplot example
+
+Gnuplot example:
 
 ```
 gnuplot -p gnuplot/example_2_stats.plot
