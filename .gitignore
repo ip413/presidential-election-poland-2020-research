@@ -3,3 +3,6 @@ useful.txt
 node_modules
 temp/*.plot
 db/*.sqlite
+.vscode
+.RData
+.Rhistory
