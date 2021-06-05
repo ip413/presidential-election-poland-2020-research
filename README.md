@@ -63,7 +63,7 @@ For example:
     ![](script/../scripts/001-official-vs-average/results/results-official-vs-average.png)
 * some have higher results form polling stations with high ratio of invalid votes, some lower
   ![](scripts/003-official-vs-low-invalid-vs-high-invalid/results/official-vs-low-invalid-vs-high-invalid-votes.png)
-  * some polling stations from one building have very similar results
+* some polling stations places in one building have very similar results
   ![](scripts/008-one-location-result-skew/results/one-polling-station-katowice-mdk-40-111.png)
   and some don't
   ![](scripts/008-one-location-result-skew/results/one-polling-station-wroclaw-school-84.png)
