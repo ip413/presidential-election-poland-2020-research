@@ -29,7 +29,11 @@ npm i
 ```
 
 ## Usage
-Just play around with csv, ods or sqlite3 files. No GUI, sorry. Scripts are located in ```scripts``` dir and results in ```scripts/results``` dir.
+Just play around with csv, ods or sqlite3 files. No GUI, sorry. 
+
+
+Scripts are located in ```scripts``` dir and results in ```scripts/results```.
+
 
 Gnuplot example
 
