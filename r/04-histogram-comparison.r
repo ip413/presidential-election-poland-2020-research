@@ -136,13 +136,13 @@ df2rnormTrzaskowski = rnorm(27000, mean=mean(df2$result_trzaskowski), sd=sd(df2$
 
 png("r-results/04-histogram-comparison/04-histogram-comparison-duda-normal-dist-model.png", width = 600, height = 480)
 df2rnormDudaLimited <- limit_vector_values(df2rnormDuda, 0, 100)
-hist(df2rnormDudaLimited, breaks=100, main="duda, round 2, normal distribution model", freq=F)
+hist(df2rnormDudaLimited, breaks=100, xlab = "result [%]", main="duda, round 2, normal distribution model", freq=F)
 lines(seq(100), dnorm(seq(100), mean(df2rnormDudaLimited), sd(df2rnormDudaLimited)), ylim = range(0, 0.031), col="red")
 
 png("r-results/04-histogram-comparison/04-histogram-comparison-trzaskowski-normal-dist-model.png", width = 600, height = 480)
 df2rnormTrzaskowskiLimited <- limit_vector_values(df2rnormTrzaskowski, 0, 100)
-hist(df2rnormTrzaskowskiLimited, breaks=100, main="trzaskowski, round 2, normal distribution model", freq=F)
-lines(seq(100), dnorm(seq(100), mean(df2rnormTrzaskowskiLimited), sd(df2rnormTrzaskowskiLimited)), ylim = range(0, 0.031), col="red")
+hist(df2rnormTrzaskowskiLimited, breaks=100, xlab = "result [%]", main="trzaskowski, round 2, normal distribution model", freq=F)
+lines(seq(100), dnorm(seq(100), mean(df2rnormTrzaskowskiLimited), sd(df2rnormTrzaskowskiLimited)),  ylim = range(0, 0.031), col="red")
 
 
 
